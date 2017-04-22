@@ -1,0 +1,31 @@
+version: "2.1"
+services:
+  rt001:
+    image: pierky/bird
+    build: 
+      context: .
+    volumes:
+        - ./rt001:/etc/bird/:rw
+    networks:
+      test_net:
+        ipv4_address: 31.13.95.34
+
+  rt002:
+    build:
+      context: .
+    image: pierky/bird
+    volumes:
+        - ./rt002:/etc/bird/:rw
+    networks:
+      test_net:
+        ipv4_address: 31.13.95.35
+
+networks:
+  test_net:
+    enable_ipv6: false
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 31.13.95.0/24
+        gateway: 31.13.95.1

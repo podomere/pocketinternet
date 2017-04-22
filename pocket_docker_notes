@@ -1,0 +1,76 @@
+Notes: On Pocket Internet
+
+1) Install Docker for Mac via MacPorts... don't use... get the DMG
+2) Install Docker DMG for Mac (stable)
+
+docker --version
+docker-compose --version
+docker-machine --version
+
+docker run hello-world
+docker run -d -p 80:80 --name webserver nginx
+docker stop webserver
+docker ps
+
+docker kill $(docker ps -q)
+
+
+# add /pocketinternet/ to the Docker File Sharing path + restart.
+
+mkdir /pocketinternet/bgp0001/bird.conf
+
+# Access the command line.
+
+docker exec -it 7f7610a25224 birdcl
+docker exec -it <id> birdcl
+
+create a "docker-compose.yml"
+
+
+
+# Stop all containers
+docker stop $(docker ps -a -q)
+# Delete all containers
+docker rm $(docker ps -a -q)
+# Delete all images
+docker rmi $(docker images -q)
+
+Facebook Prefix => 31.13.95.0/24
+
+a) build local directories per host that will contain the bird.conf file....
+e.g. 
+rt001
+rt002
+rt003
+rt004
+rt005
+
+b) build and copy across the BGP config for that particular host...
+rt001/bird.conf
+rt002/bird.conf
+rt003/bird.conf
+rt004/bird.conf
+rt005/bird.conf
+
+c) connect to BIRD instance and check health?
+
+# From host....
+
+docker exec -it <id> birdcl
+
+# From inside BIRD
+show status
+show protocols
+show protocols all bgp1
+
+
+
+### DEFUNCT ####
+
+
+docker run -d --name rt001-as32934 -v `pwd`/rt001:/etc/bird/:rw pierky/bird
+docker run -d --name rt002-as32935 -v `pwd`/rt002:/etc/bird/:rw pierky/bird
+
+
+
+
