@@ -21,7 +21,7 @@ mkdir /pocketinternet/bgp0001/bird.conf
 
 # Access the command line.
 
-docker exec -it 7f7610a25224 birdcl
+docker exec -it 3dfc5c956219 birdcl
 docker exec -it <id> birdcl
 
 create a "docker-compose.yml"
@@ -34,6 +34,11 @@ docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 # Delete all images
 docker rmi $(docker images -q)
+
+# Compose
+
+docker-compose up -d
+
 
 Facebook Prefix => 31.13.95.0/24
 
